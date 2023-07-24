@@ -1,7 +1,7 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { Filter } from "lucide-react"
+import {useRouter} from "next/navigation"
+import {Filter} from "lucide-react"
 
 import {
   Select,
@@ -18,22 +18,26 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { ProductFilters } from "@/components/product-filters"
+import {ProductFilters} from "@/components/product-filters"
 
 const sortOptions = [
-  { name: "Newest", value: "/?date=desc" },
-  { name: "Price, low to high", value: "/?price=asc" },
-  { name: "Price, high to low", value: "/?price=desc" },
+  {name: "Newest", value: "/?date=desc"},
+  {name: "Price, low to high", value: "/?price=asc"},
+  {name: "Price, high to low", value: "/?price=desc"},
 ]
 
 export function ProductSort() {
+  let router = useRouter();
   return (
     <div className="flex items-center">
-      <Select>
+      <Select onValueChange={value => router.replace(value)}>
         <SelectTrigger className="sm:w-[180px]">
-          <SelectValue placeholder="Sort By" />
+          <SelectValue placeholder="Sort By"/>
         </SelectTrigger>
-        <SelectContent>Sort Options</SelectContent>
+        <SelectContent>{sortOptions.map(option =>
+          <SelectItem key={option.name} value={option.value}>
+            {option.name}
+          </SelectItem>)}</SelectContent>
       </Select>
       <Sheet>
         <SheetContent className="w-[300px]">
@@ -43,11 +47,11 @@ export function ProductSort() {
               Narrow your product search using the options below.
             </SheetDescription>
           </SheetHeader>
-          <ProductFilters />
+          <ProductFilters/>
         </SheetContent>
         <SheetTrigger className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
           <span className="sr-only">Filters</span>
-          <Filter className="h-5 w-5" aria-hidden="true" />
+          <Filter className="h-5 w-5" aria-hidden="true"/>
         </SheetTrigger>
       </Sheet>
     </div>
