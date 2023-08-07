@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Edit, ShoppingBag } from "lucide-react"
+import { Boxes, Edit, ShoppingBag } from "lucide-react"
 import { useShoppingCart } from "use-shopping-cart"
 
 import { Button } from "@/components/ui/button"
@@ -46,6 +46,13 @@ export function SiteHeader() {
           />
         </form>
         <div className="flex items-center space-x-1">
+          <Link href="/orderHistory">
+            <Button size="sm" variant="ghost">
+              <Boxes className="h-5 w-5" />
+              {/* <span className="ml-2 text-sm font-bold">{cartCount}</span> */}
+              <span className="sr-only">Cart</span>
+            </Button>
+          </Link>
           <Link href="/cart">
             <Button size="sm" variant="ghost">
               <ShoppingBag className="h-5 w-5" />
